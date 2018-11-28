@@ -2,6 +2,7 @@
  * External dependencies
  */
 const { escapeRegExp, map } = require( 'lodash' );
+const pluginJest = require( 'eslint-plugin-jest' );
 
 /**
  * Internal dependencies
@@ -18,16 +19,7 @@ const majorMinorRegExp = escapeRegExp( version.replace( /\.\d+$/, '' ) ) + '(\\.
 
 module.exports = {
 	root: true,
-	extends: [
-		'@wordpress/eslint-config',
-		'plugin:jest/recommended'
-	],
-	env: {
-		'jest/globals': true,
-	},
-	plugins: [
-		'jest',
-	],
+	extends: '@wordpress/eslint-config',
 	rules: {
 		'no-restricted-syntax': [
 			'error',
@@ -188,10 +180,24 @@ module.exports = {
 	},
 	overrides: [
 		{
+			files: [
+				'packages/**/test/**/*.js',
+				'packages/block-serialization-spec-parser/shared-tests.js',
+				'packages/jest-*/**/*.js',
+				'test/integration/**/*.js',
+				'test/e2e/**/*.js',
+			],
+			...pluginJest.configs.recommended,
+		},
+		{
 			files: [ 'test/e2e/**/*.js' ],
-			globals: {
-				page: true,
+			env: {
 				browser: true,
+			},
+			globals: {
+				browser: true,
+				page: true,
+				wp: true,
 			},
 		},
 	],
