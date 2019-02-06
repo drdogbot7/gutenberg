@@ -126,3 +126,4 @@ This list is manually curated to include valuable contributions by volunteers th
 | @miya0001 | @miyauchi |
 | @naogify | @naoki0h |
 | @gutendev | @gutendev |
+| @drdogbot7 | |
